@@ -54,5 +54,6 @@
   <ItemGroup>
     <Text Include="book.txt" />
     <Text Include="user.txt" />
+    <Text Include="bookcount.txt" />
   </ItemGroup>
 </Project>

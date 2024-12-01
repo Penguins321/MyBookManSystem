@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="book.txt" />
+    <Text Include="bookcount.txt" />
     <Text Include="user.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

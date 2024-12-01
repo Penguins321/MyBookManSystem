@@ -4,6 +4,7 @@
 #include"admin.h"
 #include"student.h"
 #include<iomanip>
+#include<unordered_map>
 using namespace std;
 void menu_admin();
 void menu_student();
@@ -21,9 +22,11 @@ int main() {
 	Book book;
 	Admin admin;
 	Student stu;
+	unordered_map<string, int> umap;
 	vector<User> vec_user;
 	vector<Book> vec_book;
 	vector<Book> vec_temp;									// 用于存放展示数据，用完清空
+	Book::manager.readCount();								// 读取同类型书籍数量文件
 	user.fetchUser(vec_user);								// 读取用户文件			
 	book.fetchBook(vec_book);
 	user = user.login(vec_user, user);
@@ -99,6 +102,7 @@ int main() {
 	// 信息存储到文件
 	book.saveBook(vec_book);
 	user.saveUser(vec_user);
+	Book::manager.saveCount();
 	return 0;
 }
 
