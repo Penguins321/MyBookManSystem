@@ -226,11 +226,10 @@ void User::deleteUser(vector<User>& vec) {
 
 // 友元重载输入输出运算符
 istream& operator>>(istream& is, User& user) {
-	// 清理输入缓冲区中的换行符
-	is.ignore();  // 忽略前一个输入后的换行符
 	getline(is, user.name);
 	getline(is, user.password);
 	is >> user.role;
+	is.ignore();			 // 忽略前一个输入后的换行符
 	return is;
 }
 ostream& operator<<(ostream& os, const User& user) {
