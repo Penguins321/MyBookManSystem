@@ -10,6 +10,3 @@ YU003
 YU004
 test
 rick
-YU111
-sdf
-sdf
