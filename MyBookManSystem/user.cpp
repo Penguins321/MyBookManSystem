@@ -111,7 +111,7 @@ User& User::login(vector<User>& vec,User& user) {
 	getline(cin, user.name);
 	// 遍历验证是否存在用户名
 	for (auto it = vec.begin(); it != vec.end(); ++it) {
-		if (it->name == name) {
+		if (it->name == user.name) {
 			// 验证密码
 			cout << "请输入密码：";
 			getline(cin, user.password);
