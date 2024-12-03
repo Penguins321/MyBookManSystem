@@ -10,7 +10,7 @@ void Admin::deleteBook(vector<Book>& vec) {
 	showBook(vec);
 	Book bo;
 	bo.deleteBook(vec);
-	cout << "书籍删除成功";
+	cout << "书籍删除成功" << endl;
 }
 
 // 添加图书

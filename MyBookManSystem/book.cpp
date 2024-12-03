@@ -5,7 +5,7 @@
 #include"bookManager.h"
 using namespace std;
 // 定义静态成员变量
-BookManager Book::manager;
+BookManager Book::manager = BookManager();
 void updateBookName(vector<Book>& vec);
 void updateBookAuthor(vector<Book>& vec);
 void updateMenu();
@@ -122,9 +122,17 @@ void Book::appendBook(vector<Book>& vec) {
 	cout << "请输入图书作者：";
 	getline(cin, author);
 	Book bo(isbn, book_name, author);
-	vec.push_back(bo);
-	// 同类型书籍加一
-	Book::manager.addBook(book_name);
+	int count = Book::manager.getCount(book_name);
+	// 如果bookCount里面同名称书籍数量大于一，则只增加数量，vec里面不再添加
+	if (count > 0) {
+		Book::manager.addBook(book_name);
+	}
+	else
+	{
+		vec.push_back(bo);
+		// 同类型书籍加一
+		Book::manager.addBook(book_name);
+	}
 }
 
 // 删除图书
@@ -134,8 +142,15 @@ void Book::deleteBook(vector<Book>& vec) {
 	getline(cin, isbn);
 	for (auto it = vec.begin(); it != vec.end();) {
 		if (it->isbn == isbn) {
-			manager.removeBook(it->book_name);				// 同类型图书也减一
-			it = vec.erase(it);
+			int count = Book::manager.getCount(it->book_name);
+			if (count > 0) {
+				manager.removeBook(it->book_name);				// 同类型图书减一,vector数据内容不再减少
+				++it;
+			}
+			else {
+				it = vec.erase(it);
+				manager.removeBook(it->book_name);				// 同类型图书也减一
+			}
 		}
 		else
 			++it;

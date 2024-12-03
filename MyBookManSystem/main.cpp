@@ -9,15 +9,15 @@ using namespace std;
 void menu_admin();
 void menu_student();
 
+
+
 int main() {
 
 	/*
 	封装好需要的类，实现其功能，最后组装
 	book类的：同类型图书数量(一对多的关系)    属性的设计----> 学习使用观察者模式
-	同类型书籍数量未存文件
-	添加时同类型书籍未增加，修改时有
-	添加，删除书籍的逻辑，先判断同名书籍是否大于1      
 	*/
+
 	User user;
 	Book book;
 	Admin admin;
@@ -140,3 +140,29 @@ void menu_student() {
 	cout << "|     请选择你要执行的操作（输入对应编号）：    |\n";
 	cout << "+-----------------------------------------------+\n";
 }
+
+
+
+
+/*
+void func1();
+void func2();
+void func3();
+
+void func1() {
+	func2();
+}
+
+void func2() {
+	func3();
+}
+
+void func3(){
+	cout << "hello world" << endl;
+}
+
+int main() {
+
+	func1();
+	return 0;
+}*/

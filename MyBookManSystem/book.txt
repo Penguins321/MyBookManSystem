@@ -1,5 +1,5 @@
 YU001
-www
+诗经
 Jessico
 YU002
 剑来
@@ -10,3 +10,6 @@ YU003
 YU004
 test
 rick
+YU005
+中国近代史
+中国邮电出版社

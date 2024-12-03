@@ -11,6 +11,7 @@ class BookManager {
 private:
 	 unordered_map <string, int> bookCount;
 public:
+	BookManager() = default;
 	void addBook(const string& name);                   // 添加书籍
 	void removeBook(const string& name);				// 移除书籍
 	int getCount(const string& name) const;				// 获取同类型数量

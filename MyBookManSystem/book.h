@@ -18,10 +18,10 @@ public:
 
 	Book(){}
 	Book(const string& isbn, const string& book_name, const string& author) :isbn(isbn), book_name(book_name), author(author) {
-		manager.addBook(book_name);
+		// manager.addBook(book_name);			// 数据耦合太严重，应该由用户操作数据
 	}
 	virtual ~Book() {
-		manager.removeBook(book_name);
+		// manager.removeBook(book_name);
 	}
 	void modifyByIsbn(vector<Book>& vec);								// 修改图书属性
 	void fetchBook(vector<Book>& vec);									// 读取图书文件
