@@ -153,6 +153,7 @@ void User::createUser(vector<User>& vec) {
 		break;
 	}
 	cout << "注册成功！" << endl;
+
 }
 
 // 读取文件

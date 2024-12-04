@@ -8,7 +8,8 @@ using namespace std;
 void Student::borrowBook(vector<Book>& vec) {
 	showBook(vec);
 	Book bo;
-	bo.deleteBook(vec);
+	Book* pb = &bo;
+	pb->deleteBook(vec);
 	cout << "书籍借阅成功" << endl;
 }
 
@@ -16,5 +17,6 @@ void Student::borrowBook(vector<Book>& vec) {
 void Student::returnBook(vector<Book>& vec) {
 	cout << "请输入归还书籍的相关信息" << endl;
 	Book bo;
-	bo.appendBook(vec);
+	Book* pb = &bo;
+	pb->appendBook(vec);
 }
