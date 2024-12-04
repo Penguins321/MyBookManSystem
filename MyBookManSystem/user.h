@@ -22,8 +22,8 @@ public:
 	User(const string& name, const string& password):name(name), password(password), role(0),login_status(false) {}
 	virtual ~User() = default;
 
-	void showBook(vector<Book>& vec) const;								// 显示书籍信息 
-	void findBook(vector<Book>& vec1,vector<Book>& vec2);				// 按属性检索图书
+	void showBook(vector<Book>* vec) const;								// 显示书籍信息 
+	void findBook(vector<Book>* vec1,vector<Book>& vec2);				// 按属性检索图书
 	User& login(vector<User>* vec,User* user);												// 登录 （应该放在基础平台）
 
 	// 以下方法原本放在admin.cpp

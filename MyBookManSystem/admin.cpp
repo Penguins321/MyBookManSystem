@@ -6,10 +6,10 @@
 using namespace std;
 
 // 删除图书
-void Admin::deleteBook(vector<Book>& vec) {
+void Admin::deleteBook(vector<Book>* vec) {
 	showBook(vec);
 	Book* pb = new Book;
-	pb->deleteBook(&vec);
+	pb->deleteBook(vec);
 	cout << "书籍删除成功" << endl;
 	delete pb;
 }

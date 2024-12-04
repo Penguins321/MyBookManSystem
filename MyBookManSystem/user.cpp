@@ -4,19 +4,19 @@
 #include<iomanip>
 #include<fstream>
 using namespace std;
-void findByIsbn(vector<Book>& vec1, vector<Book>& vec2);
-void findByBookName(vector<Book>& vec1, vector<Book>& vec2);
-void findByAuthor(vector<Book>& vec1, vector<Book>& vec2);
+void findByIsbn(vector<Book>* vec1, vector<Book>& vec2);
+void findByBookName(vector<Book>* vec1, vector<Book>& vec2);
+void findByAuthor(vector<Book>* vec1, vector<Book>& vec2);
 void signUp(vector<User>* vec, User& user);
 
 
 // 显示书籍信息
-void User::showBook(vector<Book>& vec) const {
+void User::showBook(vector<Book>* vec) const {
 	cout << left << setw(20) << "isbn图书编号" << left << setw(20) << "图书名称"
 		<< left << setw(20) << "图书作者" << left << setw(20) << "同名称书籍数量" << endl;
 	cout << string(50, '-') << endl;
 	int count = 0;
-	for (auto it = vec.begin(); it != vec.end(); ++it) {
+	for (auto it = vec->begin(); it != vec->end(); ++it) {
 		count = Book::manager.getCount(it->book_name);
 		cout << left << setw(20) << it->isbn << left << setw(20) << it->book_name
 			<< left << setw(20) << it->author << left << setw(20) << count << endl;
@@ -27,7 +27,7 @@ void User::showBook(vector<Book>& vec) const {
 /*
 isbn、书名、图书作者
 vec1为数据传入*/
-void User::findBook(vector<Book>& vec1, vector<Book>& vec2) {
+void User::findBook(vector<Book>* vec1, vector<Book>& vec2) {
 	int choice;
 	cout << "请输入搜索类型： 1:按ISBN   2：按图书名称   3：按作者" << endl;
 	cin >> choice;
@@ -49,13 +49,13 @@ void User::findBook(vector<Book>& vec1, vector<Book>& vec2) {
 }
 
 // 按ISBN搜索
-void findByIsbn(vector<Book>& vec1, vector<Book>& vec2) {
+void findByIsbn(vector<Book>* vec1, vector<Book>& vec2) {
 	string isbn;
 	User user;
 	cout << "请输入图书ISBN号：";
 	getline(cin, isbn);
 	Book bo;
-	for (auto it = vec1.begin(); it != vec1.end();++it) {
+	for (auto it = vec1->begin(); it != vec1->end();++it) {
 		if (it->isbn == isbn) {
 			bo.isbn = it->isbn;
 			bo.book_name = it->book_name;
@@ -63,17 +63,17 @@ void findByIsbn(vector<Book>& vec1, vector<Book>& vec2) {
 			vec2.push_back(bo);
 		}
 	}
-	user.showBook(vec2);
+	user.showBook(&vec2);
 }
 
 // 按图书名称搜索
-void findByBookName(vector<Book>& vec1, vector<Book>& vec2) {
+void findByBookName(vector<Book>* vec1, vector<Book>& vec2) {
 	string book_name;
 	User user;
 	cout << "请输入你将要搜索的图书名称：";
 	getline(cin, book_name);
 	Book bo;
-	for (auto it = vec1.begin(); it != vec1.end();++it) {
+	for (auto it = vec1->begin(); it != vec1->end();++it) {
 		if (it->book_name == book_name) {
 			bo.isbn = it->isbn;
 			bo.book_name = it->book_name;
@@ -81,17 +81,17 @@ void findByBookName(vector<Book>& vec1, vector<Book>& vec2) {
 			vec2.push_back(bo);
 		}
 	}
-	user.showBook(vec2);
+	user.showBook(&vec2);
 }
 
 // 按作者名称搜索
-void findByAuthor(vector<Book>& vec1, vector<Book>& vec2) {
+void findByAuthor(vector<Book>* vec1, vector<Book>& vec2) {
 	string author;
 	User user;
 	cout << "请输入你将要搜索的作者：";
 	getline(cin, author);
 	Book bo;
-	for (auto it = vec1.begin(); it != vec1.end();++it) {
+	for (auto it = vec1->begin(); it != vec1->end();++it) {
 		if (it->author == author) {
 			bo.isbn = it->isbn;
 			bo.book_name = it->book_name;
@@ -99,7 +99,7 @@ void findByAuthor(vector<Book>& vec1, vector<Book>& vec2) {
 			vec2.push_back(bo);
 		}
 	}
-	user.showBook(vec2);
+	user.showBook(&vec2);
 }
 
 // 用户登录           

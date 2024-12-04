@@ -11,8 +11,8 @@ class Student :public User {
 
 public:
 
-	void borrowBook(vector<Book>& vec);						// 借阅图书
-	void returnBook(vector<Book>& vec);						// 归还图书
+	void borrowBook(vector<Book>* vec);						// 借阅图书
+	void returnBook(vector<Book>* vec);						// 归还图书
 };
 
 #endif // !__STUDENT__
