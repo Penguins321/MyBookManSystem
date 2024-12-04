@@ -9,7 +9,7 @@ using namespace std;
 void Admin::deleteBook(vector<Book>& vec) {
 	showBook(vec);
 	Book* pb = new Book;
-	pb->deleteBook(vec);
+	pb->deleteBook(&vec);
 	cout << "Êé¼®É¾³ý³É¹¦" << endl;
 	delete pb;
 }

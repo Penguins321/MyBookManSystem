@@ -9,7 +9,7 @@ void Student::borrowBook(vector<Book>& vec) {
 	showBook(vec);
 	Book bo;
 	Book* pb = &bo;
-	pb->deleteBook(vec);
+	pb->deleteBook(&vec);
 	cout << "Êé¼®½èÔÄ³É¹¦" << endl;
 	delete pb;
 }

@@ -19,6 +19,7 @@ int main() {
 	*/
 
 	User user;
+	User* userPtr = new User;
 	Book book;
 	Admin admin;
 	Student stu;
@@ -26,16 +27,16 @@ int main() {
 	vector<Book> vec_book;
 	vector<Book> vec_temp;									// 用于存放展示数据，用完清空
 	Book::manager.readCount();								// 读取同类型书籍数量文件
-	user.fetchUser(vec_user);								// 读取用户文件			
+	userPtr->fetchUser(vec_user);								// 读取用户文件			
 	book.fetchBook(&vec_book);
-	user = user.login(vec_user, user);
-	while (!user.login_status) {
+	*userPtr = userPtr->login(vec_user, *userPtr);
+	while (!userPtr->login_status) {
 		cout << "用户名或密码错误，请重新输入：" << endl;
-		user = user.login(vec_user, user);
+		*userPtr = userPtr->login(vec_user, *userPtr);
 	}
 	int choice;
 	// 判断用户权限
-	if (user.role == 1) {		// 管理员
+	if (userPtr->role == 1) {		// 管理员
 		do
 		{
 			menu_admin();
@@ -45,13 +46,13 @@ int main() {
 				continue;
 			switch (choice) {
 			case 1:
-				user.createUser(vec_user);
+				userPtr->createUser(vec_user);
 				break;
 			case 2:
-				user.showUser(vec_user);
+				userPtr->showUser(vec_user);
 				break;
 			case 3:
-				user.deleteUser(vec_user);
+				userPtr->deleteUser(vec_user);
 				break;
 			case 4:
 				admin.showBook(vec_book);
@@ -73,7 +74,7 @@ int main() {
 			}
 		} while (choice);
 	}
-	else if (user.role == 2) {				// 学生
+	else if (userPtr->role == 2) {				// 学生
 		do {
 			menu_student();
 			cin >> choice;
@@ -100,8 +101,9 @@ int main() {
 	}
 	// 信息存储到文件
 	book.saveBook(vec_book);
-	user.saveUser(vec_user);
+	userPtr->saveUser(vec_user);
 	Book::manager.saveCount();
+	delete userPtr;				// 释放动态分配的内存
 	return 0;
 }
 
