@@ -11,6 +11,7 @@ void Student::borrowBook(vector<Book>& vec) {
 	Book* pb = &bo;
 	pb->deleteBook(vec);
 	cout << "书籍借阅成功" << endl;
+	delete pb;
 }
 
 // 归还图书
@@ -19,4 +20,5 @@ void Student::returnBook(vector<Book>& vec) {
 	Book bo;
 	Book* pb = &bo;
 	pb->appendBook(vec);
+	delete pb;
 }

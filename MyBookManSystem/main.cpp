@@ -22,7 +22,6 @@ int main() {
 	Book book;
 	Admin admin;
 	Student stu;
-	unordered_map<string, int> umap;
 	vector<User> vec_user;
 	vector<Book> vec_book;
 	vector<Book> vec_temp;									// 用于存放展示数据，用完清空
