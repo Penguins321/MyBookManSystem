@@ -24,14 +24,14 @@ public:
 
 	void showBook(vector<Book>& vec) const;								// 显示书籍信息 
 	void findBook(vector<Book>& vec1,vector<Book>& vec2);				// 按属性检索图书
-	User& login(vector<User>& vec,User& user);												// 登录 （应该放在基础平台）
+	User& login(vector<User>* vec,User* user);												// 登录 （应该放在基础平台）
 
 	// 以下方法原本放在admin.cpp
-	void createUser(vector<User>& vec);						// 创建用户
-	void showUser(vector<User>& vec);						// 查看用户
-	void fetchUser(vector<User>& vec);						// 读取用户文件
-	void saveUser(vector<User>& vec);						// 保存用户信息文件
-	void deleteUser(vector<User>& vec);						// 删除用户
+	void createUser(vector<User>* vec);						// 创建用户
+	void showUser(vector<User>* vec);						// 查看用户
+	void fetchUser(vector<User>* vec);						// 读取用户文件
+	void saveUser(vector<User>* vec);						// 保存用户信息文件
+	void deleteUser(vector<User>* vec);						// 删除用户
 
 	// 友元重载输入输出运算符
 	friend istream& operator>>(istream& is, User& user);

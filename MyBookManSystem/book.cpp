@@ -23,11 +23,11 @@ void Book::modifyByIsbn(vector<Book>* vec) {
 	{
 	case 1:
 		updateBookName(vec);
-		pb->saveBook(*vec);					// 修改后的信息存储起来
+		pb->saveBook(vec);					// 修改后的信息存储起来
 		break;
 	case 2:
 		updateBookAuthor(vec);
-		pb->saveBook(*vec);					// 修改后的信息存储起来
+		pb->saveBook(vec);					// 修改后的信息存储起来
 		break;
 	case 3:
 		updateBook();
@@ -103,11 +103,11 @@ void Book::fetchBook(vector<Book>* vec) {
 	delete pb;
 }
 // 保存图书文件
-void Book::saveBook(vector<Book>& vec) {
+void Book::saveBook(vector<Book>* vec) {
 	fstream outFile;
 	Book* bookPtr = new Book;
 	outFile.open("book.txt", ios::out | ios::trunc);			// 清空原文件内容并添加
-	for (auto it = vec.begin(); it != vec.end(); ++it) {
+	for (auto it = vec->begin(); it != vec->end(); ++it) {
 		bookPtr->isbn = it->isbn;
 		bookPtr->book_name = it->book_name;
 		bookPtr->author = it->author;
@@ -117,7 +117,7 @@ void Book::saveBook(vector<Book>& vec) {
 }
 
 // 添加图书
-void Book::appendBook(vector<Book>& vec) {
+void Book::appendBook(vector<Book>* vec) {
 	Book* pb = new Book;
 	cout << "请输入图书ISBN号：";
 	getline(cin, pb->isbn);
@@ -132,7 +132,7 @@ void Book::appendBook(vector<Book>& vec) {
 	}
 	else
 	{
-		vec.push_back(*pb);
+		vec->push_back(*pb);
 		// 同类型书籍加一
 		Book::manager.addBook(pb->book_name);
 	}

@@ -15,7 +15,7 @@ void Admin::deleteBook(vector<Book>& vec) {
 }
 
 // 添加图书
-void Admin::appendBook(vector<Book>& vec)    {
+void Admin::appendBook(vector<Book>* vec)    {
 	cout << "请输入添加书籍的相关信息";
 	Book* pb = new Book;
 	pb->appendBook(vec);

@@ -9,6 +9,6 @@ class Admin :public User {
 public:
 
 	void deleteBook(vector<Book>& vec);						// 删除图书
-	void appendBook(vector<Book>& vec);						// 添加图书
+	void appendBook(vector<Book>* vec);						// 添加图书
 };
 #endif // !__ADMIN__

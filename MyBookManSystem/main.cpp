@@ -18,21 +18,20 @@ int main() {
 	book类的：同类型图书数量(一对多的关系)    属性的设计----> 学习使用观察者模式
 	*/
 
-	User user;
 	User* userPtr = new User;
-	Book book;
-	Admin admin;
-	Student stu;
-	vector<User> vec_user;
+	Book* bookPtr = new Book;
+	Admin* adminPtr = new Admin;
+	Student* stuPtr = new Student;
+	vector<User>* ptr_user = new vector<User>;
 	vector<Book> vec_book;
 	vector<Book> vec_temp;									// 用于存放展示数据，用完清空
 	Book::manager.readCount();								// 读取同类型书籍数量文件
-	userPtr->fetchUser(vec_user);								// 读取用户文件			
-	book.fetchBook(&vec_book);
-	*userPtr = userPtr->login(vec_user, *userPtr);
+	userPtr->fetchUser(ptr_user);								// 读取用户文件			
+	bookPtr->fetchBook(&vec_book);
+	*userPtr = userPtr->login(ptr_user, userPtr);
 	while (!userPtr->login_status) {
 		cout << "用户名或密码错误，请重新输入：" << endl;
-		*userPtr = userPtr->login(vec_user, *userPtr);
+		*userPtr = userPtr->login(ptr_user, userPtr);
 	}
 	int choice;
 	// 判断用户权限
@@ -46,29 +45,29 @@ int main() {
 				continue;
 			switch (choice) {
 			case 1:
-				userPtr->createUser(vec_user);
+				userPtr->createUser(ptr_user);
 				break;
 			case 2:
-				userPtr->showUser(vec_user);
+				userPtr->showUser(ptr_user);
 				break;
 			case 3:
-				userPtr->deleteUser(vec_user);
+				userPtr->deleteUser(ptr_user);
 				break;
 			case 4:
-				admin.showBook(vec_book);
+				adminPtr->showBook(vec_book);
 				break;
 			case 5:
-				book.modifyByIsbn(&vec_book);
+				bookPtr->modifyByIsbn(&vec_book);
 				break;
 			case 6:
-				admin.appendBook(vec_book);
+				adminPtr->appendBook(&vec_book);
 				break;
 			case 7:
-				admin.findBook(vec_book, vec_temp);
+				adminPtr->findBook(vec_book, vec_temp);
 				vec_temp.clear();
 				break;
 			case 8:
-				admin.deleteBook(vec_book);
+				adminPtr->deleteBook(vec_book);
 			default:
 				break;
 			}
@@ -82,17 +81,17 @@ int main() {
 				continue;
 			switch (choice) {
 			case 1:
-				stu.showBook(vec_book);
+				stuPtr->showBook(vec_book);
 				break;
 			case 2:
-				stu.findBook(vec_book, vec_temp);
+				stuPtr->findBook(vec_book, vec_temp);
 				vec_temp.clear();
 				break;
 			case 3:
-				stu.borrowBook(vec_book);
+				stuPtr->borrowBook(vec_book);
 				break;
 			case 4:
-				stu.returnBook(vec_book);
+				stuPtr->returnBook(vec_book);
 				break;
 			default:
 				break;
@@ -100,10 +99,14 @@ int main() {
 		} while (choice);
 	}
 	// 信息存储到文件
-	book.saveBook(vec_book);
-	userPtr->saveUser(vec_user);
+	bookPtr->saveBook(&vec_book);
+	userPtr->saveUser(ptr_user);
 	Book::manager.saveCount();
 	delete userPtr;				// 释放动态分配的内存
+	delete bookPtr;
+	delete adminPtr;
+	delete stuPtr;
+	delete ptr_user;
 	return 0;
 }
 
