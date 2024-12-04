@@ -27,7 +27,7 @@ int main() {
 	vector<Book> vec_temp;									// 用于存放展示数据，用完清空
 	Book::manager.readCount();								// 读取同类型书籍数量文件
 	user.fetchUser(vec_user);								// 读取用户文件			
-	book.fetchBook(vec_book);
+	book.fetchBook(&vec_book);
 	user = user.login(vec_user, user);
 	while (!user.login_status) {
 		cout << "用户名或密码错误，请重新输入：" << endl;
@@ -57,7 +57,7 @@ int main() {
 				admin.showBook(vec_book);
 				break;
 			case 5:
-				book.modifyByIsbn(vec_book);
+				book.modifyByIsbn(&vec_book);
 				break;
 			case 6:
 				admin.appendBook(vec_book);

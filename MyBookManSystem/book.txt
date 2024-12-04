@@ -1,6 +1,6 @@
 YU001
 诗经
-Jessico
+人民有点出版社
 YU002
 剑来
 烽火戏诸侯
@@ -10,3 +10,6 @@ YU003
 YU005
 中国近代史
 中国邮电出版社
+YU004
+C++ Primer Plus
+Stephen Prata

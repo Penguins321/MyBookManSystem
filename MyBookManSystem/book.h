@@ -23,8 +23,8 @@ public:
 	virtual ~Book() {
 		// manager.removeBook(book_name);
 	}
-	void modifyByIsbn(vector<Book>& vec);								// 修改图书属性
-	void fetchBook(vector<Book>& vec);									// 读取图书文件
+	void modifyByIsbn(vector<Book>* vec);								// 修改图书属性
+	void fetchBook(vector<Book>* vec);									// 读取图书文件
 	void saveBook(vector<Book>& vec);									// 保存图书文件
 	void appendBook(vector<Book>& vec);									// 添加图书
 	void deleteBook(vector<Book>& vec);									// 按isbn号删除图书

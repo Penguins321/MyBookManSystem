@@ -6,28 +6,28 @@
 using namespace std;
 // 定义静态成员变量
 BookManager Book::manager = BookManager();
-void updateBookName(vector<Book>& vec);
-void updateBookAuthor(vector<Book>& vec);
+void updateBookName(vector<Book>* vec);
+void updateBookAuthor(vector<Book>* vec);
 void updateMenu();
 void updateBook();
 
 // 修改图书属性
-void Book::modifyByIsbn(vector<Book>& vec) {
-	int choice;
-	Book bo;
+void Book::modifyByIsbn(vector<Book>* vec) {
+	int* pchoice = new int;
+	Book* pb = new Book;
 	cout << "请输入想要的操作：" << endl;
 	updateMenu();
-	cin >> choice;
+	cin >> *pchoice;
 	cin.ignore();
-	switch (choice)
+	switch (*pchoice)
 	{
 	case 1:
-		updateBookName(vec);
-		bo.saveBook(vec);					// 修改后的信息存储起来
+		updateBookName(&vec);
+		pb->saveBook(vec);					// 修改后的信息存储起来
 		break;
 	case 2:
-		updateBookAuthor(vec);
-		bo.saveBook(vec);					// 修改后的信息存储起来
+		updateBookAuthor(&vec);
+		pb->saveBook(vec);					// 修改后的信息存储起来
 		break;
 	case 3:
 		updateBook();
@@ -35,6 +35,8 @@ void Book::modifyByIsbn(vector<Book>& vec) {
 	default:
 		break;
 	}
+	delete pb;
+	delete pchoice;
 }
 
 void updateMenu() {
@@ -46,12 +48,12 @@ void updateMenu() {
 /*
 1/修改vector里面的书籍名称
 2/修改unordered_map里面的同名称书籍数量*/
-void updateBookName(vector<Book>& vec) {
-	string isbn;
+void updateBookName(vector<Book>* vec) {
+	string* pisbn = new string;
 	cout << "请输入修改书籍的ISBN：";
-	getline(cin, isbn);
-	for (auto it = vec.begin(); it != vec.end();++it) {
-		if (isbn == it->isbn) {
+	getline(cin, *pisbn);
+	for (auto it = vec->begin(); it != vec->end();++it) {
+		if (*pisbn == it->isbn) {
 			string name; 
 			cout << "请输入修改后的书籍名称：";
 			getline(cin, name);
@@ -60,14 +62,15 @@ void updateBookName(vector<Book>& vec) {
 			Book::manager.addBook(it->book_name);							// 新名称的书籍数量加一
 		}
 	}
+	delete pisbn;
 }
 
 // 修改书籍作者
-void updateBookAuthor(vector<Book>& vec) {
+void updateBookAuthor(vector<Book>* vec) {
 	string isbn;
 	cout << "请输入修改书籍的ISBN：";
 	getline(cin, isbn);
-	for (auto it = vec.begin(); it != vec.end();++it) {
+	for (auto it = vec->begin(); it != vec->end();++it) {
 		if (isbn == it->isbn) {
 			string author;
 			cout << "请输入修改后的作者名称：";
@@ -80,59 +83,60 @@ void updateBookAuthor(vector<Book>& vec) {
 // 修改同名书籍数量
 void updateBook() {
 	string book_name;
-	int count;
+	int* pcount = new int;
 	cout << "输入修改数量的书籍名称：";
 	getline(cin, book_name);
 	cout << "输入修改后的书籍数量：";
-	cin >> count;
-	Book::manager.updateCount(book_name, count);
+	cin >> *pcount;
+	Book::manager.updateCount(book_name, *pcount);
+	delete pcount;
 }
 
 // 读取图书文件
-void Book::fetchBook(vector<Book>& vec) {
+void Book::fetchBook(vector<Book>* vec) {
 	fstream inFile;
-	Book bo;
+	Book* pb = new Book;
 	inFile.open("book.txt",ios::in);
-	while (inFile >> bo) {
-		vec.push_back(bo);
+	while (inFile >> *pb) {
+		vec.push_back(*bo);
 	}
+	delete pb;
 }
 // 保存图书文件
 void Book::saveBook(vector<Book>& vec) {
 	fstream outFile;
-	Book bo;
+	Book* bookPtr = new Book;
 	outFile.open("book.txt", ios::out | ios::trunc);			// 清空原文件内容并添加
 	for (auto it = vec.begin(); it != vec.end(); ++it) {
-		bo.isbn = it->isbn;
-		bo.book_name = it->book_name;
-		bo.author = it->author;
-		outFile << bo;
+		bookPtr->isbn = it->isbn;
+		bookPtr->book_name = it->book_name;
+		bookPtr->author = it->author;
+		outFile << *bookPtr;
 	}
+	delete bookPtr;
 }
 
 // 添加图书
 void Book::appendBook(vector<Book>& vec) {
-	string isbn;
-	string book_name;
-	string author;
+	Book* pb = new Book;
 	cout << "请输入图书ISBN号：";
-	getline(cin, isbn);
+	getline(cin, pb->isbn);
 	cout << "请输入图书名称：";
-	getline(cin, book_name);
+	getline(cin, pb->book_name);
 	cout << "请输入图书作者：";
-	getline(cin, author);
-	Book bo(isbn, book_name, author);
-	int count = Book::manager.getCount(book_name);
+	getline(cin, pb->author);
+	int count = Book::manager.getCount(pb->book_name);
 	// 如果bookCount里面同名称书籍数量大于一，则只增加数量，vec里面不再添加
 	if (count > 0) {
-		Book::manager.addBook(book_name);
+		Book::manager.addBook(pb->book_name);
 	}
 	else
 	{
-		vec.push_back(bo);
+		vec.push_back(*pb);
 		// 同类型书籍加一
-		Book::manager.addBook(book_name);
+		Book::manager.addBook(pb->book_name);
 	}
+	delete pb;			// 释放动态分配的内存
 }
 
 // 删除图书
