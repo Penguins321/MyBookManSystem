@@ -5,7 +5,7 @@
 #include"bookManager.h"
 using namespace std;
 // 定义静态成员变量
-BookManager Book::manager = BookManager();
+//BookManager Book::manager = BookManager();
 void updateBookName(vector<Book>* vec);
 void updateBookAuthor(vector<Book>* vec);
 void updateMenu();
@@ -49,6 +49,7 @@ void updateMenu() {
 1/修改vector里面的书籍名称
 2/修改unordered_map里面的同名称书籍数量*/
 void updateBookName(vector<Book>* vec) {
+	BookManager* manager_ptr = BookManager::getInstance();
 	string* pisbn = new string;
 	cout << "请输入修改书籍的ISBN：";
 	getline(cin, *pisbn);
@@ -57,9 +58,9 @@ void updateBookName(vector<Book>* vec) {
 			string name; 
 			cout << "请输入修改后的书籍名称：";
 			getline(cin, name);
-			Book::manager.removeBook(it->book_name);						// 原来名称的书籍数量减一
+			manager_ptr->removeBook(it->book_name);						// 原来名称的书籍数量减一
 			it->book_name = name;
-			Book::manager.addBook(it->book_name);							// 新名称的书籍数量加一
+			manager_ptr->addBook(it->book_name);							// 新名称的书籍数量加一
 		}
 	}
 	delete pisbn;
@@ -82,13 +83,14 @@ void updateBookAuthor(vector<Book>* vec) {
 
 // 修改同名书籍数量
 void updateBook() {
+	BookManager* manager_ptr = BookManager::getInstance();
 	string book_name;
 	int* pcount = new int;
 	cout << "输入修改数量的书籍名称：";
 	getline(cin, book_name);
 	cout << "输入修改后的书籍数量：";
 	cin >> *pcount;
-	Book::manager.updateCount(book_name, *pcount);
+	manager_ptr->updateCount(book_name, *pcount);
 	delete pcount;
 }
 
@@ -118,6 +120,7 @@ void Book::saveBook(vector<Book>* vec) {
 
 // 添加图书
 void Book::appendBook(vector<Book>* vec) {
+	BookManager* manager_ptr = BookManager::getInstance();
 	Book* pb = new Book;
 	cout << "请输入图书ISBN号：";
 	getline(cin, pb->isbn);
@@ -125,35 +128,36 @@ void Book::appendBook(vector<Book>* vec) {
 	getline(cin, pb->book_name);
 	cout << "请输入图书作者：";
 	getline(cin, pb->author);
-	int count = manager.getCount(pb->book_name);
+	int count = manager_ptr->getCount(pb->book_name);
 	// 如果bookCount里面同名称书籍数量大于一，则只增加数量，vec里面不再添加
 	if (count > 0) {
-		manager.addBook(pb->book_name);
+		manager_ptr->addBook(pb->book_name);
 	}
 	else
 	{
 		vec->push_back(*pb);
 		// 同类型书籍加一
-		manager.addBook(pb->book_name);
+		manager_ptr->addBook(pb->book_name);
 	}
 	delete pb;			// 释放动态分配的内存
 }
 
 // 删除图书
 void Book::deleteBook(vector<Book>* vec) {
+	BookManager* manager_ptr = BookManager::getInstance();
 	string isbn;
 	cout << "请输入对应的isbn号：";
 	getline(cin, isbn);
 	for (auto it = vec->begin(); it != vec->end();) {
 		if (it->isbn == isbn) {
-			int count = manager.getCount(it->book_name);
+			int count = manager_ptr->getCount(it->book_name);
 			if (count > 0) {
-				manager.removeBook(it->book_name);				// 同类型图书减一,vector数据内容不再减少
+				manager_ptr->removeBook(it->book_name);				// 同类型图书减一,vector数据内容不再减少
 				++it;
 			}
 			else {
 				it = vec->erase(it);
-				manager.removeBook(it->book_name);				// 同类型图书也减一
+				manager_ptr->removeBook(it->book_name);				// 同类型图书也减一
 			}
 		}
 		else

@@ -25,8 +25,10 @@ int main() {
 	vector<User>* vec_user_ptr = new vector<User>;
 	vector<Book>* vec_book_ptr = new vector<Book>;
 	vector<Book> vec_book;
-	vector<Book> vec_temp;									// 用于存放展示数据，用完清空
-	Book::manager.readCount();								// 读取同类型书籍数量文件
+	vector<Book> vec_temp;											// 用于存放展示数据，用完清空
+	// 获取单例实例
+	BookManager* manager_ptr = BookManager::getInstance();			// 创建的指针整个程序运行期间有效，无需手动释放
+	manager_ptr->readCount();										// 读取同类型书籍数量文件
 	userPtr->fetchUser(vec_user_ptr);								// 读取用户文件			
 	bookPtr->fetchBook(vec_book_ptr);
 	*userPtr = userPtr->login(vec_user_ptr, userPtr);
@@ -102,7 +104,7 @@ int main() {
 	// 信息存储到文件
 	bookPtr->saveBook(vec_book_ptr);
 	userPtr->saveUser(vec_user_ptr);
-	Book::manager.saveCount();
+	manager_ptr->saveCount();
 	delete userPtr;				// 释放动态分配的内存
 	delete bookPtr;
 	delete adminPtr;

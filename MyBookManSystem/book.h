@@ -14,7 +14,7 @@ public:
 	string isbn;		     // 图书编号
 	string book_name;	     // 图书名称
 	string author;		     // 图书作者
-	static BookManager manager;		// 同类型图书数量(按照书籍名称确定)->委托管理
+	//static BookManager manager;		// 同类型图书数量(按照书籍名称确定)->委托管理
 
 	Book(){}
 	Book(const string& isbn, const string& book_name, const string& author) :isbn(isbn), book_name(book_name), author(author) {

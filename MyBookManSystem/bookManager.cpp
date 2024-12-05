@@ -5,9 +5,23 @@
 #include<fstream>
 #include<sstream>
 using namespace std;
-//unordered_map<string, int> BookManager::bookCount;
+// 静态变量实现
+BookManager* BookManager::instance; 
+mutex BookManager::mtx;
 
 // 同名称书籍数量  管理器
+
+// 全局访问点
+BookManager* BookManager::getInstance() {
+	if (instance == nullptr) {
+		lock_guard<mutex> lock(mtx);		// std::lock_guard 自动加锁
+		if (instance == nullptr) {
+			instance = new BookManager();
+		}
+	}
+	return instance;
+}
+
 	// 添加书籍
 void BookManager::addBook(const string& name) {
 	bookCount[name]++;

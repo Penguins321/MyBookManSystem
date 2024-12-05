@@ -15,9 +15,10 @@ void User::showBook(vector<Book>* vec) const {
 	cout << left << setw(20) << "isbn图书编号" << left << setw(20) << "图书名称"
 		<< left << setw(20) << "图书作者" << left << setw(20) << "同名称书籍数量" << endl;
 	cout << string(50, '-') << endl;
+	BookManager* manager_ptr = BookManager::getInstance();
 	int count = 0;
 	for (auto it = vec->begin(); it != vec->end(); ++it) {
-		count = Book::manager.getCount(it->book_name);
+		count = manager_ptr->getCount(it->book_name);
 		cout << left << setw(20) << it->isbn << left << setw(20) << it->book_name
 			<< left << setw(20) << it->author << left << setw(20) << count << endl;
 	}
