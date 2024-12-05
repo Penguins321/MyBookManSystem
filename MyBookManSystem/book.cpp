@@ -125,16 +125,16 @@ void Book::appendBook(vector<Book>* vec) {
 	getline(cin, pb->book_name);
 	cout << "请输入图书作者：";
 	getline(cin, pb->author);
-	int count = Book::manager.getCount(pb->book_name);
+	int count = manager.getCount(pb->book_name);
 	// 如果bookCount里面同名称书籍数量大于一，则只增加数量，vec里面不再添加
 	if (count > 0) {
-		Book::manager.addBook(pb->book_name);
+		manager.addBook(pb->book_name);
 	}
 	else
 	{
 		vec->push_back(*pb);
 		// 同类型书籍加一
-		Book::manager.addBook(pb->book_name);
+		manager.addBook(pb->book_name);
 	}
 	delete pb;			// 释放动态分配的内存
 }
@@ -146,7 +146,7 @@ void Book::deleteBook(vector<Book>* vec) {
 	getline(cin, isbn);
 	for (auto it = vec->begin(); it != vec->end();) {
 		if (it->isbn == isbn) {
-			int count = Book::manager.getCount(it->book_name);
+			int count = manager.getCount(it->book_name);
 			if (count > 0) {
 				manager.removeBook(it->book_name);				// 同类型图书减一,vector数据内容不再减少
 				++it;

@@ -129,31 +129,36 @@ User& User::login(vector<User>* vec,User* user) {
 
 // 创建用户
 void User::createUser(vector<User>* vec) {
-	int choice;
-	string userName;
-	User user;
-	cout << "请输入要创建的角色： 管理员（1）  学生（2）";
-	cin >> choice;
-	while (cin.get() != '\n')
-		continue;
-	cout << "请输入注册用户名：" << endl;
-	getline(cin, userName);
-	switch (choice) {
-	case 1:
-		user.name = userName;
-		user.role = choice;
-		signUp(vec, user);							// 注册逻辑
-		break;
-	case 2:
-		user.name = userName;
-		user.role = choice;
-		signUp(vec, user);
-		break;
-	default:
-		break;
-	}
-	cout << "注册成功！" << endl;
+	if (vec != nullptr) {
+		int choice;
+		string userName;
+		User user;
+		cout << "请输入要创建的角色： 管理员（1）  学生（2）";
+		cin >> choice;
+		while (cin.get() != '\n')
+			continue;
+		cout << "请输入注册用户名：" << endl;
+		getline(cin, userName);
+		switch (choice) {
+		case 1:
+			user.name = userName;
+			user.role = choice;
+			signUp(vec, user);							// 注册逻辑
+			break;
+		case 2:
+			user.name = userName;
+			user.role = choice;
+			signUp(vec, user);
+			break;
+		default:
+			break;
+		}
+		cout << "注册成功！" << endl;
 
+	}
+	else
+		cout << "入参为空指针" << endl;
+	
 }
 
 // 读取文件
