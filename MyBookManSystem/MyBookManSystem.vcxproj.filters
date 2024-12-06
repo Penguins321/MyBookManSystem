@@ -33,6 +33,15 @@
     <ClCompile Include="admin.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="login.h">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="login.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LibrarySystem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="book.h">
@@ -48,6 +57,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="admin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="librarySystem.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

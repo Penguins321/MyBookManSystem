@@ -130,6 +130,9 @@
     <ClCompile Include="admin.cpp" />
     <ClCompile Include="book.cpp" />
     <ClCompile Include="bookManager.cpp" />
+    <ClCompile Include="LibrarySystem.cpp" />
+    <ClCompile Include="login.cpp" />
+    <ClCompile Include="login.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="student.cpp" />
     <ClCompile Include="user.cpp" />
@@ -138,6 +141,7 @@
     <ClInclude Include="admin.h" />
     <ClInclude Include="book.h" />
     <ClInclude Include="bookManager.h" />
+    <ClInclude Include="librarySystem.h" />
     <ClInclude Include="student.h" />
     <ClInclude Include="user.h" />
   </ItemGroup>

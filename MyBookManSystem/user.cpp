@@ -103,31 +103,6 @@ void findByAuthor(vector<Book>* vec1, vector<Book>& vec2) {
 	user.showBook(&vec2);
 }
 
-// 用户登录           
-// idea 1：传入student, admin, 两个类添加参数：是否登录，用于区分登录的是学生还是管理员
-// idea 2：数据抽出存放到user类。student类和admin类只有特有方法
-User& User::login(vector<User>* vec,User* user) {
-	bool flag = false;
-	cout << "请输入用户名：";
-	getline(cin, user->name);
-	// 遍历验证是否存在用户名
-	for (auto it = vec->begin(); it != vec->end(); ++it) {
-		if (it->name == user->name) {
-			// 验证密码
-			cout << "请输入密码：";
-			getline(cin, user->password);
-			if (it->password == user->password) {
-				user->role = it->role;
-				user->login_status = true;
-				cout << "登录成功！" << endl;
-				return *user;
-			}
-		}
-	}
-	return *user;
-}
-
-
 // 创建用户
 void User::createUser(vector<User>* vec) {
 	if (vec != nullptr) {
